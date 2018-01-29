@@ -1,0 +1,12 @@
+<% include partials/header%>
+<h1>Sign Up!</h1>
+<form method="post" action="/register">
+	<input type="text" name="username" placeholder="Username" required><br>
+	<input type="email" placeholder="Email" name="email" required><br>
+	<input type="password" name="password" placeholder="Password" required><br>
+	<input type="password" placeholder="Confirm Password" name="confirmpassword" required><br>
+	<label for="birthday">Birthday</label><br>
+	<input type="date" class="form-control" id="birthday" name="birthday" required><br>
+	<button type="submit">Register</button>
+</form>
+<% include partials/footer%>
