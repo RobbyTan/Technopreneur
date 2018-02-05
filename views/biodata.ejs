@@ -1,0 +1,119 @@
+<% include partials/header%>
+<div class="container">
+  <div class="row">
+    <div class="profile">
+      <div class="image">
+        <img align="left" class="fb-image-lg" src="http://0104.nccdn.net/1_5/1ff/0d0/1ea/page-image-3.jpg" alt="Profile Picture"/>
+      </div>    
+      <img align="left" class="fb-image-profile thumbnail" src="<%=biodata.image%>" onerror="this.src='https://myspace.com/common/images/user.png'" alt="Profile Picture">
+      <div class="fb-profile-text">
+        <h1><%=biodata.username.charAt(0).toUpperCase() +biodata.username.slice(1)%> </h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div data-spy="scroll" class="tabbable-panel">
+    <div class="tabbable-line">
+      <ul class="nav nav-tabs tpbgcr">
+        <li class="active">
+          <a href="#tab_default_1" data-toggle="tab">Stories</a>
+        </li>
+        <li>
+          <a href="#tab_default_2" data-toggle="tab">Profile</a>
+        </li>
+        <%if(currentUser){%>
+        <% if(biodata._id.equals(currentUser._id) || currentUser._id.equals("5a23729c8a83510014e945da")){%>
+        <li>
+          <a href="#tab_default_3" data-toggle="tab">Settings</a>
+        </li>
+        <%}%>
+        <%}%>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_default_1">
+          <div class="container">
+            <div class="row">
+              <% story.reverse().forEach(function(story){ %>
+              <div class="col-sm-8">
+                <div class="panel panel-white post panel-shadow">
+                  <div class="post-heading">
+                    <div class="pull-left image">
+                      <img class="img-circle avatar" src="<%=biodata.image%>" onerror="this.src='https://myspace.com/common/images/user.png'" alt="Profile Picture">
+                    </div>
+                    <div class="pull-left meta">
+                      <div class="title h5">
+                        <a href="#"><b><%=biodata.username.charAt(0).toUpperCase() +biodata.username.slice(1)%></b></a>
+                        made a post.
+                      </div>
+                      <h6 class="text-muted time"> <%=moment(story.createdAt).fromNow() %></h6>
+                    </div>
+                  </div> 
+                  <div class="post-description"> 
+                    <%console.log(story.image)%>
+                    <p><%= story.name.charAt(0).toUpperCase() +story.name.slice(1)%></p>
+                  </div>
+                  <div class="stats">
+                    <a href="/story/<%= story._id %>" class="btn btn-default stat-item">
+                      <i class="fa fa-eye icon"></i> Read More !
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane tptd2" id="tab_default_2">
+          <p>Profile</p>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+               <label for="email">Email :</label>
+               <p><%=biodata.email%></p>
+             </div>
+             <div class="form-group">
+               <label for="email">Birthday :</label>
+               <p><%=biodata.birthday.charAt(0).toUpperCase() +biodata.birthday.slice(1)%></p>
+             </div>
+             <div class="form-group">
+               <label for="email">Gender :</label>
+               <p><%=biodata.gender.charAt(0).toUpperCase() +biodata.gender.slice(1)%></p>
+             </div>
+              <div class="form-group">
+               <label for="email">Status :</label>
+               <p><%=biodata.status.charAt(0).toUpperCase() +biodata.status.slice(1)%></p>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="tab-pane" id="tab_default_3">  
+         <div class="row">
+           <div class="col-sm-2"></div>
+           <div class="col-sm-8">
+             <div class="form-group">
+              <form class="delete-form" action="/biodata/<%=biodata._id%>/<%=biodata.username%>?_method=DELETE" method="POST">
+                <br>
+                <hr class="style1">
+                <br>
+                <p>
+                  If you choose to delete to delete your account, keep in mind that you won't be able to login, share your story or comment on any stories for this website with the same username in the future.
+                  And any of your data will be deleted permanently too.
+                </p>
+                <button class="btn btn-sm btn-danger">
+                  <span><i class="glyphicon glyphicon-remove"></i></span> Delete Account
+                </button>
+                <br>
+                <hr class="style1">
+                <br>
+              </form> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<% include partials/footer%>

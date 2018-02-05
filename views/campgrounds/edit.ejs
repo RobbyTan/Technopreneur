@@ -1,0 +1,22 @@
+<% include ../partials/header%>
+<div class="container ctrdit1">
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<h1 class="h1edtstry">Edit startup</h1>
+			<div class="widget-area no-padding blank">
+				<div class="status-upload">
+					<form action="/startup/<%=campground._id%>?_method=PUT" method="post">
+						<div class="form-group">
+							<input type="text" value="<%=campground.name%>" name="campground[name]" class="form-control status-upload" required>
+						</div>
+						<textarea name="campground[description]" required><%=campground.description%></textarea>
+						<button class="btn btn-success">Edit</button>
+					</form>
+					<a href="/startup/<%=campground._id%>">Go Back</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% include ../partials/footer%>

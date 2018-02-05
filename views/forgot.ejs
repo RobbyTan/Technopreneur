@@ -1,0 +1,28 @@
+<% include partials/header%>
+<div class="container-forgot">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div class="main main-login main-center" align="center">
+			<div class="panel-heading">
+				<h1 class="title text-center">Forgot Password</h1>
+				<hr/>
+			</div>
+			<form action="/forgot" method="POST">
+				<div class="form-group">
+					<label for="name" class="control-label">Email address</label>
+					<div class="input-group col-xs-6">
+						<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+						<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" name="email" required/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-md forgot-button">Reset Password</button>
+				</div>
+				<div class="form-group">
+					<a href="/login">Cancel</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<% include partials/footer%>

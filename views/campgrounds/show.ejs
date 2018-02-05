@@ -1,0 +1,107 @@
+<% include ../partials/header%>
+<div class="container">
+	<div class="container ctnshow1">
+		<div class="row">
+			<div class="well">
+				<div class="media">
+					<a class="pull-left" href="/biodata/<%=campground.author.id%>">
+						<img class="media-object" src="<%=campground.author.image%>" onerror="this.src='https://myspace.com/common/images/user.png'" style="width:40px; height: 40px;">
+					</a>
+					<div class="media-body">
+						<h4 class="media-heading"><%= campground.name%></h4>
+						<p class="text-right">By <a href="/biodata/<%=campground.author.id%>"><%= campground.author.username %></a></p>
+						<p><%=campground.description%></p>
+						<ul class="list-inline list-unstyled" style="position: absolute;">
+							<li><span><i class="glyphicon glyphicon-calendar"></i> <%= moment(campground.createdAt).fromNow() %> </span></li>
+							<li>|</li>
+							<span><i class="glyphicon glyphicon-comment"></i> <%=commentCount%> comments</span>
+							<%if(currentUser){%>
+							<% if(campground.author.id.equals(currentUser._id) || currentUser._id.equals("5a23729c8a83510014e945da")){%>
+							<li>|</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle sh1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span><i class="glyphicon glyphicon-cog" aria-hidden="true"></i></span>
+								</a>
+								<ul class="dropdown-menu list-inline list-unstyled">
+									<li>
+										<div class="form-group">
+											<a href="/startup/<%=campground._id%>/edit"><button class="btn btn-sm btn-warning">
+												<span><i class="glyphicon glyphicon-edit"></i></span> Edit
+											</button></a>
+										</div>
+									</li>
+									<li>
+										<form class="delete-form" action="/startup/<%=campground._id%>?_method=DELETE" method="POST">
+											<button class="btn btn-sm btn-danger">
+												<span><i class="glyphicon glyphicon-remove"></i></span> Delete
+											</button>
+										</form>	
+									</li>
+								</ul>
+							</li>
+							<% } %>
+							<% } %>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<div class="well">
+					<div class="text-right">
+						<a class="btn btn-sm btn-success btn_show" href="/startup/<%=campground._id%>/comments/new">
+						<div class="glyphicon glyphicon-plus"></div>&nbsp; Comment</a>
+					</div>
+					<%campground.comments.forEach(function(comment){ %>
+					<div class="comments-list">
+						<div class="media">
+							<p>
+								<%if(currentUser){%>
+								<% if(comment.author.id.equals(currentUser._id) || currentUser._id.equals("5a23729c8a83510014e945da")){%>
+								<ul class="dropdown pull-right">
+									<small><%= moment(comment.createdAt).fromNow() %></small> | 
+									<a class="dropdown-toggle sh1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span><i class="glyphicon glyphicon-cog" aria-hidden="true"></i></span>
+									</a>
+									<ul class="dropdown-menu list-inline list-unstyled">
+										<li>
+											<div class="form-group">
+												<form class="edit-form">
+													<a href="/startup/<%=campground._id%>/comments/<%=comment._id%>/edit" class="btn btn-sm btn-warning">
+														<span><i class="glyphicon glyphicon-edit"></i></span> Edit
+													</a>
+												</form>
+											</div>
+										</li>
+										<li>
+											<form class="delete-form" action="/startup/<%=campground._id%>/comments/<%=comment._id%>
+												?_method=DELETE" method="POST">
+												<button class="btn btn-sm btn-danger">
+													<span><i class="glyphicon glyphicon-remove"></i></span> Delete
+												</button>
+											</form>	
+										</li>
+									</ul>
+								</ul> 
+								<% } %>
+								<% } %>
+							</p>
+							<a class="media-left" href="#">
+								<img src="<%=comment.author.image%>" onerror="this.src='https://myspace.com/common/images/user.png'" style="width:40px; height: 40px;" alt="Profile Picture">
+							</a>
+							<div class="media-body">
+								<a class="sh1" href="/biodata/<%=comment.author.id%>"><h4 class="media-heading user_name"><%=comment.author.username%></h4></a>
+								<p><%=comment.text%></p>
+							</div>
+						</div>
+					</div>
+					<% }) %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% include ../partials/footer%>
