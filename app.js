@@ -56,7 +56,7 @@ app.use(function(req,res,next){
 app.use(indexRoutes);
 app.use("/startup",campgroundRoutes);
 // untuk menaruh "/campgrounds di dpn semua routes campgrounds"
-app.use("/story/:id/comments",commentRoutes);
+app.use("/startup/:id/comments",commentRoutes);
 // untuk memberitahu express untuk menggunakan routes
 app.use("/about",aboutUs)
 app.use("/help",helpRoutes)

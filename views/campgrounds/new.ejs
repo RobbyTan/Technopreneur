@@ -6,11 +6,13 @@
 			<h1 class="h1nwstry">Share your startup</h1>
 			<div class="widget-area no-padding blank">
 				<div class="status-upload">
-					<form action="/startup" method="post">
+					<form action="/startup" method="post" enctype="multipart/form-data">
 						<div class="form-group">
 							<input type="text" placeholder="Title" name="name" class="form-control status-upload" required>
 						</div>
-						<textarea name="description" placeholder="What are you doing right now?" required></textarea>
+						<input type="file" name="image" accept="image/*" onchange="loadFile(event)">
+						<img style="margin-left: auto; margin-right : auto ; display: block" id="output"/>
+						<textarea name="description" placeholder="What are you doing right now?" required></textarea><br>
 						<button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share </button>
 					</form>
 					<a href="/startup">Go Back</a>
@@ -20,4 +22,10 @@
 		<div class="col-md-2"></div>
 	</div>
 </div>
+<script>
+	var loadFile = function(event) {
+		var output = document.getElementById('output');
+		output.src = URL.createObjectURL(event.target.files[0]);
+	};
+</script>
 <% include ../partials/footer%>

@@ -4,14 +4,14 @@
 	<h1 class="h1edtcmmnt">Edit Comments</h1>
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
-			<form action="/story/<%=campground_id%>/comments/<%=comment._id%>?_method=PUT" method="post">
+			<form action="/startup/<%=campground_id%>/comments/<%=comment._id%>?_method=PUT" method="post">
 				<div class="form-group">
 					 <!-- <input type="text" value="<%=comment.text%>" name="comment[text]" class="form-control" required> -->
 					<textarea type="text" name="comment[text]" class="form-control" required><%=comment.text%></textarea>
 				</div>
 				<button class="btn btn-success btn-md">Submit</button>
 			</form>
-			<a href="/story/<%=campground_id%>">Go Back</a>
+			<a href="/startup/<%=campground_id%>">Go Back</a>
 		</div>
 	</div>
 </div>

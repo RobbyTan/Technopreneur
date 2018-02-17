@@ -1,6 +1,9 @@
 var express= require ("express");
 var Campground = require ("../models/campground");
 var User=require("../models/user");
+const { cloudinary, upload } = require('../middleware/cloudinary');
+var async = require("async");
+var crypto = require("crypto");
 var router=express.Router();
 // express router
 
@@ -22,30 +25,32 @@ router.get("/",function(req,res){
 })
 router.get("/search",function(req,res){
 	var search=req.body.search;
-	 if (req.query.search) {
-       const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-       Campground.find({ "name": regex }, function(err, foundCampgrounds) {
-           if(err) {
-               console.log(err);
-           } else {
-              res.render("campgrounds/index",{campgrounds:foundCampgrounds, currentUser:req.user});
-           }
-       }); 
-    }else{
-    	res.redirect("/startup")
-    }
+	if (req.query.search) {
+		const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+		Campground.find({ "name": regex }, function(err, foundCampgrounds) {
+			if(err) {
+				console.log(err);
+			} else {
+				res.render("campgrounds/index",{campgrounds:foundCampgrounds, currentUser:req.user});
+			}
+		}); 
+	}else{
+		res.redirect("/startup")
+	}
 })
 // CREATE
-router.post("/",isLoggedIn,function(req,res){
-	var name=req.body.name;
-	var image=req.body.image;
-	var description=req.body.description;
-	var author = {
-		id: req.user._id,
-		username : req.user.username,
-		image : req.user.image
-	}
-	var newCampgrounds={name:name,image:image,description:description,author:author};
+router.post("/",isLoggedIn,upload.single('image'),function(req,res){
+	if(req.file){
+		cloudinary.uploader.upload(req.file.path,function(result){
+			var name=req.body.name;
+			var image=result.secure_url;
+			var description=req.body.description;
+			var author = {
+				id: req.user._id,
+				username : req.user.username,
+				image : req.user.image
+			}
+			var newCampgrounds={name:name,image:image,description:description,author:author};
 	// simpan ke database
 	Campground.create(newCampgrounds),function(err,newCampground){
 		if(err){
@@ -56,6 +61,27 @@ router.post("/",isLoggedIn,function(req,res){
 		}
 	}
 	res.redirect("/startup")
+})
+	}else{
+		var name=req.body.name;
+		var description=req.body.description;
+		var author = {
+			id: req.user._id,
+			username : req.user.username,
+			image : req.user.image
+		}
+		var newCampgrounds={name:name,description:description,author:author};
+	// simpan ke database
+	Campground.create(newCampgrounds),function(err,newCampground){
+		if(err){
+			console.log(err)
+		}else{
+			res.redirect("/startup")
+			console.log(newCampground)
+		}
+	}
+	res.redirect("/startup")
+}
 })
 // new
 router.get("/new",isLoggedIn,function(req,res){
@@ -88,15 +114,28 @@ router.get("/:id/edit",checkOwnership,function(req,res){
 	})
 })
 // UPDATE ROUTES
-router.put("/:id",checkOwnership,function(req,res){
-	Campground.findByIdAndUpdate(req.params.id,req.body.campground,function(err,updatedCampground){
-		if(err){
-			res.redirect("/startup");
-		}else{
-			res.redirect("/startup/"+req.params.id);
-		}
-	})
-});
+router.put("/:id",checkOwnership,upload.single('image'),function(req,res){
+	if(req.file){
+		cloudinary.uploader.upload(req.file.path,function(result){
+			var name=req.body.name;
+			var image=result.secure_url;
+			var description=req.body.description;
+			var author = {
+				id: req.user._id,
+				username : req.user.username,
+				image : req.user.image
+			}
+			var updateCampgrounds={name:name,image:image,description:description,author:author};
+			Campground.findByIdAndUpdate(req.params.id,updateCampgrounds,function(err,updatedCampground){
+				if(err){
+					res.redirect("/startup");
+				}else{
+					res.redirect("/startup/"+req.params.id);
+				}
+			})
+		})
+	}
+})
 // DELETE ROUTES
 router.delete("/:id",checkOwnership,function(req,res){
 	Campground.findByIdAndRemove(req.params.id,function(err){
@@ -137,9 +176,9 @@ function checkOwnership(req,res,next){
 		}else{
 			res.redirect("/login");
 		}
-}
-function escapeRegex(text) {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-};
+	}
+	function escapeRegex(text) {
+		return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+	};
 
 	module.exports= router;

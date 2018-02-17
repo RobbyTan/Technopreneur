@@ -6,11 +6,13 @@
 			<h1 class="h1edtstry">Edit startup</h1>
 			<div class="widget-area no-padding blank">
 				<div class="status-upload">
-					<form action="/startup/<%=campground._id%>?_method=PUT" method="post">
+					<form action="/startup/<%=campground._id%>?_method=PUT" method="post" enctype="multipart/form-data">
 						<div class="form-group">
-							<input type="text" value="<%=campground.name%>" name="campground[name]" class="form-control status-upload" required>
+							<input type="text" value="<%=campground.name%>" name="name" class="form-control status-upload" required>
 						</div>
-						<textarea name="campground[description]" required><%=campground.description%></textarea>
+						<input type="file" name="image" accept="image/*" onchange="loadFile(event)">
+						<img style="margin-left: auto; margin-right : auto ; display: block" id="output" src="<%=campground.image%>" />
+						<textarea name="description" required><%=campground.description%></textarea>
 						<button class="btn btn-success">Edit</button>
 					</form>
 					<a href="/startup/<%=campground._id%>">Go Back</a>
@@ -19,4 +21,10 @@
 		</div>
 	</div>
 </div>
+<script>
+	var loadFile = function(event) {
+		var output = document.getElementById('output');
+		output.src = URL.createObjectURL(event.target.files[0]);
+	};
+</script>
 <% include ../partials/footer%>

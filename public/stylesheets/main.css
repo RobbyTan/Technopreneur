@@ -372,9 +372,9 @@ input::-webkit-input-placeholder {
 }
 
 /* edit.ejs story */
-.ctrdit1{
+/*.ctrdit1{
 	height: 100%;
-}
+}*/
 
 .h1edtstry{
 	text-align: center;
@@ -644,9 +644,9 @@ img.fb-image-lg{
 }
 
 /* new.ejs comments */	
-.newpost {
+/*.newpost {
 	height: 100%;
-}
+}*/
 
 .h1newcmt{
 	margin-bottom: 10px;

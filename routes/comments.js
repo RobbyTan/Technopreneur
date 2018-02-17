@@ -23,7 +23,7 @@ router.post("/",isLoggedIn,function(req,res){
 		// untuk mengmbil req.params.id di kelas lain harus taruh di router {mergeParams : true}
 		if(err){
 			console.log(err);
-			res.redirect("/story");
+			res.redirect("/startup");
 		}else{
 			Comment.create(req.body.comment,function(err,comment){
 				if(err){
@@ -37,7 +37,7 @@ router.post("/",isLoggedIn,function(req,res){
 					campground.save();
 					console.log(comment);
 					req.flash("success","Successfully Created New Comment!");
-					res.redirect("/story/"+req.params.id);
+					res.redirect("/startup/"+req.params.id);
 				}
 			})
 
@@ -60,7 +60,7 @@ router.put("/:comment_id",checkOwnership,function(req,res){
 		if(err){
 			res.redirect("back");
 		}else{
-			res.redirect("/story/"+req.params.id);
+			res.redirect("/startup/"+req.params.id);
 		}
 	})
 })
@@ -72,7 +72,7 @@ router.delete("/:comment_id",checkOwnership,function(req,res){
 			res.redirect("back");
 		}else{
 			req.flash("success","Delete Successfull!");
-			res.redirect("/story/"+req.params.id);
+			res.redirect("/startup/"+req.params.id);
 		}
 	})
 })
