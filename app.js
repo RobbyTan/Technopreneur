@@ -13,6 +13,9 @@ mongoose.Promise = global.Promise;
 var url ="mongodb://localhost/starvest"
 mongoose.connect(url,{useMongoClient: true});
 
+// EMAIL ROUTES
+
+
 // REQUIRE ROUTES
 var campgroundRoutes=require("./routes/campgrounds"),
 	commentRoutes=require("./routes/comments"),

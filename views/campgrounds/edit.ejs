@@ -11,7 +11,7 @@
 							<input type="text" value="<%=campground.name%>" name="name" class="form-control status-upload" required>
 						</div>
 						<input type="file" name="image" accept="image/*" onchange="loadFile(event)">
-						<img style="margin-left: auto; margin-right : auto ; display: block" id="output" src="<%=campground.image%>" />
+						<img style="margin-left: auto; margin-right : auto ; display: block; max-width: 50%; max-height: 50%"" id="output" src="<%=campground.image%>" />
 						<textarea name="description" required><%=campground.description%></textarea>
 						<button class="btn btn-success">Edit</button>
 					</form>
@@ -21,10 +21,4 @@
 		</div>
 	</div>
 </div>
-<script>
-	var loadFile = function(event) {
-		var output = document.getElementById('output');
-		output.src = URL.createObjectURL(event.target.files[0]);
-	};
-</script>
 <% include ../partials/footer%>

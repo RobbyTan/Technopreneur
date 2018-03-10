@@ -1,4 +1,13 @@
 <% include ../partials/header%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#transfer').hide();
+    $("#hide").click(function(){
+        $("#transfer").toggle();
+    });
+});
+</script>
 <div class="container">
 	<div class="container ctnshow1">
 		<div class="row">
@@ -11,12 +20,23 @@
 						<h4 class="media-heading"><%= campground.name%></h4>
 						<p class="text-right">By <a href="/biodata/<%=campground.author.id%>"><%= campground.author.username %></a></p>
 						<%if(campground.image){%>
-							<img style="margin-left: auto; margin-right : auto ; display: block" src="<%=campground.image%>">						
+							<img style="margin-left: auto; margin-right : auto ; display: block ; max-width: 50%; max-height: 50%"" src="<%=campground.image%>">						
 						<%}%>
 						<div>
 							
 						</div>
 						<p><%=campground.description%></p>
+						<button id="hide" class="btn-success pull-right">Investasi</button>
+						<form action="/startup/<%=campground._id%>/done" method="POST">
+						<div id="transfer">
+							Silahkan transfer ke rekening berikut :(BCA) 085763481568<br>
+							Rp <input type="number" name="nominal" min="100000"><br>
+							Investasi minimal Rp 100.000<br>
+							Kirim bukti pembayaran anda ke : starvestindonesia@gmail.com<br>
+
+							<button class="btn-success">Confirm</button>
+						</div>
+						</form>
 						<ul class="list-inline list-unstyled" style="position: absolute;">
 							<li><span><i class="glyphicon glyphicon-calendar"></i> <%= moment(campground.createdAt).fromNow() %> </span></li>
 							<li>|</li>

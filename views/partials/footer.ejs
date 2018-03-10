@@ -1,3 +1,4 @@
+
 <footer id="myFooter">
 	<div class="container">
 		<div class="row">
@@ -11,7 +12,12 @@
 		</div>
 	</div>
 </footer>
-
+<script>
+	var loadFile = function(event) {
+		var output = document.getElementById('output');
+		output.src = URL.createObjectURL(event.target.files[0]);
+	};
+</script>
 <script src="\stylesheets\js\jquery-3.2.1.min.js"></script>
 <script src="\stylesheets\bootstrap-3.3.7-dist\js\bootstrap.min.js"></script>
 </body>

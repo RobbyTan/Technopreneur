@@ -11,7 +11,16 @@ var router=express.Router();
 // express router
 
 router.get("/",function(req,res){
-	res.render("landing")
+    Campground.find().sort({'createdAt': 'asc'}).exec(function(err,allcampgrounds){
+  // kalau mau cari spesifik isi objectnya
+  if(err){
+    console.log(err);
+  }else{
+    User.find({},function(err,foundBiodata){
+      res.render("landing",{campgrounds:allcampgrounds, currentUser : req.user,biodata:foundBiodata})
+    })
+  }
+})
 })
 // AUTH ROUTES
 router.get("/register",function(req,res){
@@ -113,13 +122,13 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
       var smtpTransport = nodemailer.createTransport({
         service: 'Gmail', 
         auth: {
-          user: 'help.sonder@gmail.com',
+          user: 'starvestindonesia@gmail.com',
           pass:  process.env.GMAILPW
         }
       });
       var mailOptions = {
         to: user.email,
-        from: 'help.sonder@gmail.com',
+        from: 'starvestindonesia@gmail.com',
         subject: 'Node.js Password Reset',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
@@ -177,13 +186,13 @@ router.post('/reset/:token', function(req, res) {
       var smtpTransport = nodemailer.createTransport({
         service: 'Gmail', 
         auth: {
-          user: 'help.sonder@gmail.com',
+          user: 'starvestindonesia@gmail.com',
           pass:  process.env.GMAILPW
         }
       });
       var mailOptions = {
         to: user.email,
-        from: 'help.sonder@gmail.com',
+        from: 'starvestindonesia@gmail.com',
         subject: 'Your password has been changed',
         text: 'Hello,\n\n' +
           'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
@@ -211,6 +220,15 @@ router.get("/biodata/:id",function(req,res){
 		}
 	})
 })
+// Edit
+// router.get("/biodata/:id/edit",function(req,res){
+//   // check if the user is logged in
+//   User.findById(req.params.id ,function(err,foundBiodata){
+//     // tidak bisa pakai === karena satu object satu string
+//     res.send("Edit profile");
+//   })
+// })
+// Delete
 router.delete("/biodata/:id/:name",function(req,res){
   if(req.user){
     if(req.user._id.equals(req.params.id) || req.user._id.equals("5a23729c8a83510014e945da")){

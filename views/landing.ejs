@@ -45,48 +45,108 @@
 </div>
 
 <div class="container container-header ctnhdr-2">
-	<div class="row">
-		<div class="col-sm-2"></div>
-		<div class="col-sm-8 sb2">
-			<h2 class="hasd">
-				<strong>Share your journey with us</strong>
-			</h2>
-			<h4 class="hasd">
-				This website can be the place for you to share anything.<br> You can be the fighter who is still fighting for your journey, or you are the winner already. Or you can be someone who God sent to anyone here to help. Who ever you are, we are ready to hear your story.<br>
-				<br>
-				Be inspiration!
-				<hr>
-			</h4>
-		</div>
-		<div class="col-sm-12">
-			<div class="text-center">
-				<a class="btn btn-primary btn-lg btn_landing1 btnasd" href="/startup/new"><strong>Start Writing</strong></a>
+	<div class="row" style="padding: 50px;">
+			<div class="col-md-12 col-lg-6">
+				<div class="container">
+				<iframe width="640" height="360" src="https://www.youtube.com/embed/_qAU9s8XLC8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 			</div>
-		</div>
+			</div>
+			<div class="col-md-12 col-lg-5" style="padding-left:70px;">
+				<h2>
+					"Watch, listen, and learn."<br></h2>
+					<h3 style="margin-top: 0px;">- Donald Trump</h3>
+					<h4>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus quod maxime placeat facere possimus, omnis voluptas assumenda est,</h4>
+			</div>
 	</div>
 </div>
-<div class="parallax-container">
-	<div class="parallax">
-		<img class="imgas" src="/images/Untitled-1.png">
-	</div>
-</div>
-<div class="container container-header ctnhdr-2">
-	<div class="row">
+
+
+<div class="container container-header ctnhdr-2" style="background-color: #A62C23; color: white; ">
+	<div class="row" style="width: 80%; margin: auto;">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8 sb2">
 			<h2 class="hasd">
 				<strong>Why you need to share ?</strong>
 			</h2>
-			<h4 class="hasd">
-				We all have a lot of problems. But our biggest problem with it is we don't want to look bad in the eyes of people we admire. That keep us from sharing our problems. But it's so important to talk with someone who is comforting and nonjudgmental. That's why we will be your safe zone, just know that you can minimize your problems by discussing them with those you trust. Give your pain a voice and let someone listen. You will be amazed at how much weight will be lifted off your shoulders.<br>
-				<br>
-				<hr>
-			</h4>
+			<div class="row" style="padding:50px;">
+				<div class="col-md-3">
+					<i class="fa fa-3x fa-area-chart white-text"></i>
+					<br>Analytics
+				</div>
+				<div class="col-md-3">
+					<i class="fa fa-3x fa-area-chart white-text"></i>
+					<br>Analytics
+				</div>
+				<div class="col-md-3">
+					<i class="fa fa-3x fa-area-chart white-text"></i>
+					<br>Analytics
+				</div>
+				<div class="col-md-3">
+					<i class="fa fa-3x fa-area-chart white-text"></i>
+					<br>Analytics
+				</div>
+			</div>
+			
+
 			<br>
 		</div>
 	</div>
 </div>
-<div class="parallax-container">
-	<div class="parallax"><img class="imgas" src="/images/Untitled-2.png"></div>
+<div class="container container-header ctnhdr-2" style="border-bottom: none;">
+	<div class="row">
+		<h2 style="text-align: center;">"Watch, listen, and learn."</h2>
+			<br>
+		<div class="col-sm-1"></div>
+		<div class="col-sm-8 sb2">
+			 <% campgrounds.slice(-3).reverse().forEach(function(campground){ %>
+			<div class="row" style="padding-bottom: 50px">
+				<div class="col-md-3">
+					<img class="imgas" src="<%=campground.image%>" style="height: auto;">
+				</div>
+				<div class="col-md-8">
+					<h3 style="margin-bottom: 0px; margin-top: 10px;"><%=campground.name%></h3>
+					<p><%=campground.description.substring(0,50)%></p>
+					<a href="startup/<%= campground._id %>">Read More</a>
+				</div>
+			</div>
+			   <% }); %>
+			<br>
+		</div>
+		<div class="col-sm-2" style=" text-align: center;">
+			<h3>Member</h3>
+			<% biodata.reverse().slice(-3).reverse().forEach(function(biodata){ %>
+		<img class="imgas" src="<%=biodata.image%>" style="height: auto; border-radius: 50%!important">
+		<h4 style="margin-bottom: 5px;"><%=biodata.username%></h4>
+		<% }); %>
+	</div>
+	</div>
+</div>
+<div class="container container-header ctnhdr-2">
+	<div class="row" style="width: 80%; margin: auto;">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8 sb2">
+			<h2 class="hasd">
+				<strong>Supported by</strong>
+			</h2>
+			<div class="row">
+				<div class="col-md-3">
+					<img class="imgas" src="https://pbs.twimg.com/profile_images/482880259788767234/k2pJ6IBP_400x400.png" style="height: auto;">
+
+				</div>
+				<div class="col-md-3">
+					<img class="imgas" src="https://scontent-sea1-1.cdninstagram.com/t51.2885-19/s150x150/22069442_121648505205966_1634350865626169344_n.jpg" style="height: auto;">
+				</div>
+				<div class="col-md-3">
+					<img class="imgas" src="http://itd.medan.uph.edu/images/contents/2016/06/it%20logo3-01.png" style="height: auto;">
+				</div>
+				<div class="col-md-3">
+					<img class="imgas" src="https://pbs.twimg.com/profile_images/482880259788767234/k2pJ6IBP_400x400.png" style="height: auto;">
+				</div>
+			</div>
+			
+
+			<br>
+		</div>
+	</div>
 </div>
 <% include partials/footer%>

@@ -4,8 +4,14 @@ var User=require("../models/user");
 const { cloudinary, upload } = require('../middleware/cloudinary');
 var async = require("async");
 var crypto = require("crypto");
+const nodemailer = require('nodemailer');
 var router=express.Router();
 // express router
+
+
+// Email Sendgrid
+// const sgMail = require('@sendgrid/mail');
+// sgMail.setApiKey('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');
 
 // INDEX 
 router.get("/",function(req,res){	
@@ -148,7 +154,68 @@ router.delete("/:id",checkOwnership,function(req,res){
 		}
 	})
 });
+// EMAIL ROUTES
+// router.get('/:id/done',(req,res)=>{
+// 	const msg = {
+//   to: 'robbytanrotan@gmail.com',
+//   from: 'starvestindonesia@gmail.com',
+//   subject: 'Sending with SendGrid is Fun',
+//   text: 'and easy to do anywhere, even with Node.js',
+//   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+// };
+// sgMail.send(msg);
+// })
+router.post("/:id/done",isLoggedIn,(req,res)=>{
+var bilangan = req.body.nominal;
+	
+var	number_string = bilangan.toString(),
+	sisa 	= number_string.length % 3,
+	rupiah 	= number_string.substr(0, sisa),
+	ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
+		
+if (ribuan) {
+	separator = sisa ? '.' : '';
+	rupiah += separator + ribuan.join('.');
+}
 
+	Campground.findById(req.params.id,function(err,foundCampgrounds){
+		if(err){
+			console.log(req.params.id);
+			console.log(err);
+		}else{
+			console.log(foundCampgrounds)
+			// console.log(commentCount);
+			let transporter = nodemailer.createTransport({
+				service : 'gmail',
+				secure : false,
+				port : 25,
+				auth : {
+					user : 'starvestindonesia@gmail.com',
+					pass : process.env.GMAILPW
+				},
+				tls : {
+					rejectUnauthorized : false
+				}
+			});
+			let HelperOptions = {
+				from : '"Starvest" <starvestindonesia@gmail.com>',
+				to : req.user.email,
+				subject : 'Hello World',
+				html : '<h1>TRANSAKSI ANDA</h1><h3>Total Pembayaran : Rp '+rupiah+' </h3><h3>Produk : '+foundCampgrounds.name+
+				'</h3><h3> Sertakan bukti pembayaran anda ke email ini<h3>Jika ada pertanyaan lebih lanjut anda dapat menanyakan nya ke email ini kembali</h3>'
+			}
+			transporter.sendMail(HelperOptions, (error,info)=>{
+				if(error){
+					return console.log(error);
+				}
+				console.log("The message was sent");
+				req.flash("success","An email has been sent to you with further instructions ");
+				res.redirect('/startup')
+			})
+		}
+	})
+
+})
 // middleware
 function isLoggedIn(req,res,next){
 	if(req.isAuthenticated()){

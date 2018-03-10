@@ -11,7 +11,7 @@
 							<input type="text" placeholder="Title" name="name" class="form-control status-upload" required>
 						</div>
 						<input type="file" name="image" accept="image/*" onchange="loadFile(event)">
-						<img style="margin-left: auto; margin-right : auto ; display: block" id="output"/>
+						<img style="margin-left: auto; margin-right : auto ; display: block ; max-width: 50%; max-height: 50%" class="img-fluid" id="output"/>
 						<textarea name="description" placeholder="What are you doing right now?" required></textarea><br>
 						<button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share </button>
 					</form>
@@ -22,10 +22,4 @@
 		<div class="col-md-2"></div>
 	</div>
 </div>
-<script>
-	var loadFile = function(event) {
-		var output = document.getElementById('output');
-		output.src = URL.createObjectURL(event.target.files[0]);
-	};
-</script>
 <% include ../partials/footer%>
