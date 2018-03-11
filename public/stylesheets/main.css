@@ -2,7 +2,7 @@
 nav.navbar{
 	border-radius: 0px;
 	border: 0px;
-	background-color: #5b6d83;
+	background-color: #A62C23;
 	margin: 0px;
 	width: 100%;
 	min-height: 50px; /*100px*/
@@ -41,7 +41,7 @@ a.navbar-brand{
 
 #nav li {
 	display: block;
-	background-color: #5b6d83;
+	background-color: #A62C23;
 	padding: 0.5em;
 }
 
@@ -247,7 +247,7 @@ body{
 .hlpctnr{
 	height: 100%;
 	text-align: left;
-}		
+}
 
 .pbasd{
 	height: 100%;
@@ -292,10 +292,10 @@ div.ctnhdr-2{
 	font-family: 'Oxygen', sans-serif;
 }
 
-h1.title { 
+h1.title {
 	font-size: 50px;
-	font-family: 'Passion One', cursive; 
-	font-weight: 400; 
+	font-family: 'Passion One', cursive;
+	font-weight: 400;
 	color: #ffffff;
 }
 
@@ -416,7 +416,7 @@ img.fb-image-lg{
 	margin: -90px 10px 20px 80px;
 	z-index: 0;
 	width: 180px;
-	height: 180px; 
+	height: 180px;
 }
 
 .tabbable-panel {
@@ -525,7 +525,7 @@ img.fb-image-lg{
 	{
 		margin: -45px 10px 0px 25px;
 		z-index: 9;
-		width: 20%; 
+		width: 20%;
 	}
 }
 
@@ -587,7 +587,7 @@ img.fb-image-lg{
 	margin-right: 15px;
 }
 .stat-item{
-	margin-bottom: 15px; 
+	margin-bottom: 15px;
 	margin-left: 15px;
 }
 .post .post-description .stats .stat-item .icon {
@@ -638,12 +638,12 @@ img.fb-image-lg{
 	margin-left: 50px;
 }
 
-/* new.ejs story */	
+/* new.ejs story */
 .h1nwstry{
 	text-align: center;
 }
 
-/* new.ejs comments */	
+/* new.ejs comments */
 /*.newpost {
 	height: 100%;
 }*/
@@ -794,7 +794,7 @@ body .no-padding {
 	margin-top: 10px;
 }
 
-.btn_show{	
+.btn_show{
 	font-family: 'Oxygen', sans-serif;
 }
 
@@ -830,7 +830,7 @@ body .no-padding {
 	border-color: lightyellow;
 }
 
-.blogShort{ 
+.blogShort{
 	margin-top: 10px;
 	margin-bottom: 20px;
 	border-bottom:1px solid #ddd;
@@ -860,7 +860,7 @@ body .no-padding {
     font-size: 14pt;
     border-bottom: 2px solid #e5ebef;
     margin-bottom: 15px;
-    padding-bottom: 10px;    
+    padding-bottom: 10px;
     margin-top: 0px;
 }
 

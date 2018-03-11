@@ -26,6 +26,7 @@ $(document).ready(function(){
 							
 						</div>
 						<p><%=campground.description%></p>
+						<p><i>*Investasi harus dilakukan melalui platform kami untuk menjaga keamanan transaksi anda</i></p>
 						<button id="hide" class="btn-success pull-right">Investasi</button>
 						<form action="/startup/<%=campground._id%>/done" method="POST">
 						<div id="transfer">
@@ -42,7 +43,7 @@ $(document).ready(function(){
 							<li>|</li>
 							<span><i class="glyphicon glyphicon-comment"></i> <%=commentCount%> comments</span>
 							<%if(currentUser){%>
-							<% if(campground.author.id.equals(currentUser._id) || currentUser._id.equals("5a23729c8a83510014e945da")){%>
+							<% if(campground.author.id.equals(currentUser._id) || currentUser._id.equals("5aa4b7d422d21c37881b241d")){%>
 							<li>|</li>
 							<li class="dropdown">
 								<a class="dropdown-toggle sh1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -86,7 +87,7 @@ $(document).ready(function(){
 							<div class="media">
 								<p>
 									<%if(currentUser){%>
-									<% if(comment.author.id.equals(currentUser._id) || currentUser._id.equals("5a23729c8a83510014e945da")){%>
+									<% if(comment.author.id.equals(currentUser._id) || currentUser._id.equals("5aa4b7d422d21c37881b241d")){%>
 									<ul class="dropdown pull-right">
 										<a class="dropdown-toggle sh1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<span><i class="glyphicon glyphicon-cog" aria-hidden="true"></i></span>

@@ -10,11 +10,9 @@ flash				  = require("connect-flash"),
 mongoose   			  = require('mongoose');
 mongoose.Promise = global.Promise; 
 // var url ="mongodb://sonder:sonder@ds119436.mlab.com:19436/final_project"
-var url ="mongodb://localhost/starvest"
-mongoose.connect(url,{useMongoClient: true});
-
-// EMAIL ROUTES
-
+// let DATABASE_URL = process.env.DATABASE_URL || "mongodb://localhost/starvest"
+let DATABASE_URL = 'mongodb://starvest:starvest@ds163918.mlab.com:63918/starvest'
+mongoose.connect(DATABASE_URL,{useMongoClient: true});
 
 // REQUIRE ROUTES
 var campgroundRoutes=require("./routes/campgrounds"),

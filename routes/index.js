@@ -24,33 +24,33 @@ router.get("/",function(req,res){
 })
 // AUTH ROUTES
 router.get("/register",function(req,res){
-	res.render("register");
+  res.render("register");
 })
 router.post("/register", upload.single('image'),function(req,res){
-	var password=req.body.password;
-	var confirmPassword= req.body.confirmpassword;
+  var password=req.body.password;
+  var confirmPassword= req.body.confirmpassword;
   if(req.file){
-	cloudinary.uploader.upload(req.file.path,function(result){
-		console.log(result.secure_url);
-		var newUser = new User({username:req.body.username,image:result.secure_url,email:req.body.email,birthday:req.body.birthday,gender:req.body.gender,status:req.body.status});
-		if(password==confirmPassword){
-			User.register(newUser,req.body.password,function(err,user){
-				if(err){
-					console.log(err);
-					req.flash("error","Username Already Exist!");
-					return res.redirect("/register");
-				}
-				passport.authenticate("local")(req,res,function(){
-					console.log(req.body.image);
-					req.flash("success","Welcome to Sonder "+req.body.username +"!")
-					res.redirect("/startup");
-				});
-			});
-		}else{
-			req.flash("error","Password don't match!")
-			res.redirect("/register")
-		}
-	});
+  cloudinary.uploader.upload(req.file.path,function(result){
+    console.log(result.secure_url);
+    var newUser = new User({username:req.body.username,image:result.secure_url,email:req.body.email,birthday:req.body.birthday,gender:req.body.gender,status:req.body.status});
+    if(password==confirmPassword){
+      User.register(newUser,req.body.password,function(err,user){
+        if(err){
+          console.log(err);
+          req.flash("error","Username Already Exist!");
+          return res.redirect("/register");
+        }
+        passport.authenticate("local")(req,res,function(){
+          console.log(req.body.image);
+          req.flash("success","Welcome to Sonder "+req.body.username +"!")
+          res.redirect("/startup");
+        });
+      });
+    }else{
+      req.flash("error","Password don't match!")
+      res.redirect("/register")
+    }
+  });
 }else{
     var newUser = new User({username:req.body.username,image:'https://myspace.com/common/images/user.png',email:req.body.email,birthday:req.body.birthday,gender:req.body.gender,status:req.body.status});
     if(password==confirmPassword){
@@ -74,25 +74,25 @@ router.post("/register", upload.single('image'),function(req,res){
 })
 // LOGIN ROUTES
 router.get("/login",function(req,res){
-	res.render("login");
+  res.render("login");
 })
 router.post("/login",passport.authenticate("local",{
-	successRedirect : "/startup",
-	failureRedirect : "/login",
-	failureFlash: true,
-	successFlash: 'Welcome to Sonder!'
+  successRedirect : "/startup",
+  failureRedirect : "/login",
+  failureFlash: true,
+  successFlash: 'Welcome to Sonder!'
 }),function(req,res){
 
 })
 // LOGOUT ROUTES
 router.get("/logout",function(req,res){
-	req.logout();
-	req.flash("success","Logged You Out!")
-	res.redirect("/startup")
+  req.logout();
+  req.flash("success","Logged You Out!")
+  res.redirect("/startup")
 });
 // FORGOT ROUTES
 router.get("/forgot",function(req,res){
-	res.render("forgot");
+  res.render("forgot");
 })
 router.post('/forgot', function(req, res, next) {
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -208,17 +208,17 @@ router.post('/reset/:token', function(req, res) {
 });
 // BIODATA ROUTES
 router.get("/biodata/:id",function(req,res){
-	User.findById(req.params.id ,function(err,foundBiodata){
-		// tidak bisa pakai === karena satu object satu string
-		if(err){
-			res.redirect("/startup");
-		}else{
-			Campground.find({"author.username": foundBiodata.username}, function(err, foundStory) {
-				console.log(foundStory);
-				res.render("biodata",{biodata:foundBiodata,story:foundStory});
-			});
-		}
-	})
+  User.findById(req.params.id ,function(err,foundBiodata){
+    // tidak bisa pakai === karena satu object satu string
+    if(err){
+      res.redirect("/startup");
+    }else{
+      Campground.find({"author.username": foundBiodata.username}, function(err, foundStory) {
+        console.log(foundStory);
+        res.render("biodata",{biodata:foundBiodata,story:foundStory});
+      });
+    }
+  })
 })
 // Edit
 // router.get("/biodata/:id/edit",function(req,res){
@@ -259,11 +259,11 @@ router.delete("/biodata/:id/:name",function(req,res){
 });
 // middleware
 function isLoggedIn(req,res,next){
-	if(req.isAuthenticated()){
-		return next();
-	}
-	req.flash("error","Please Login First");
-	res.redirect("/login");
+  if(req.isAuthenticated()){
+    return next();
+  }
+  req.flash("error","Please Login First");
+  res.redirect("/login");
 }
 
 module.exports= router;

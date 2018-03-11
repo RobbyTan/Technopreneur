@@ -1,4 +1,5 @@
 <% include ../partials/header%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <div class="container ctrdit1">
 	<div class="row">
 		<div class="col-sm-2"></div>
@@ -10,10 +11,10 @@
 						<div class="form-group">
 							<input type="text" value="<%=campground.name%>" name="name" class="form-control status-upload" required>
 						</div>
-						<input type="file" name="image" accept="image/*" onchange="loadFile(event)">
-						<img style="margin-left: auto; margin-right : auto ; display: block; max-width: 50%; max-height: 50%"" id="output" src="<%=campground.image%>" />
+						<input type="file" id="inputImage" name="image" accept="image/*" onchange="loadFile(event)">
+						<img style="margin-left: auto; margin-right : auto ; display: block; max-width: 50%; max-height: 50%"" id="output" src="<%=campground.image%>"  />
 						<textarea name="description" required><%=campground.description%></textarea>
-						<button class="btn btn-success">Edit</button>
+						<button id='btnEdit' class="btn btn-success">Edit</button>
 					</form>
 					<a href="/startup/<%=campground._id%>">Go Back</a>
 				</div>
@@ -21,4 +22,15 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	function checkInput(event){
+		if($('#inputImage').val()){
+			var output = document.getElementById('output');
+			output.src = URL.createObjectURL(event.target.files[0]);
+		}else{
+			var output = document.getElementById('output');
+			output.src = '<%=campground.image%>'
+	}
+	}
+</script>
 <% include ../partials/footer%>

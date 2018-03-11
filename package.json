@@ -10,7 +10,6 @@
   "author": "Robby",
   "license": "ISC",
   "dependencies": {
-    "@sendgrid/mail": "^6.2.1",
     "async": "^2.6.0",
     "body-parser": "^1.17.2",
     "cloudinary": "^1.9.1",
