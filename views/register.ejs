@@ -1,5 +1,9 @@
 <% include partials/header%>
-<div class="container-register">
+<script type="text/javascript">
+	$('#output').hide();
+</script>
+<div class="container-register" style="height: 150%;">
+	<div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<div class="main main-login main-center" align="center">
@@ -51,7 +55,6 @@
 				<div class="form-group">
 					<label for="status" class="control-label">Status </label>
 					<div class="input-group col-xs-6">
-						<span class="input-group-addon"><i class="fa fa-calendar fa-lg" aria-hidden="true"></i></span>
 						<select name="status">
 							<option value="Startup founder">Start Up Founder</option>
 							<option value="investor">Investor</option>
@@ -74,11 +77,11 @@
 				<div class="form-group">
 					<label for="confirm" class="control-label">Image</label>
 					<div class="input-group col-xs-6">
-						<span class="input-group-addon"><i class="fa fa-picture-o fa-lg" aria-hidden="true"></i></span>
+						<span class="input-group-addon" ><i class="fa fa-picture-o fa-lg" aria-hidden="true"></i></span>
 						<!-- <label class="btn-bs-file btn btn-xs btn-primary"> -->
 						<!-- Browse -->
-						<input type="file" name="image" accept="image/*" onchange="loadFile(event)">
-						<img class="img-thumbnail" id="output"/>
+						<input style="padding-left: 10px;" type="file" name="image" accept="image/*" onchange="loadFile(event)">
+						<img class="img-thumbnail" id="output" style="background-color:#20272e; border: 1px solid #20272e" />
 						<!-- </label> -->
 					</div>
 				</div>
@@ -92,6 +95,7 @@
 			</form>
 		</div>
 	</div>
+</div>
 </div>
 
 <% include partials/footer%>

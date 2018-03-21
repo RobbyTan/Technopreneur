@@ -42,7 +42,7 @@ router.post("/register", upload.single('image'),function(req,res){
         }
         passport.authenticate("local")(req,res,function(){
           console.log(req.body.image);
-          req.flash("success","Welcome to Sonder "+req.body.username +"!")
+          req.flash("success","Welcome to STARVEST "+req.body.username +"!")
           res.redirect("/startup");
         });
       });
@@ -62,7 +62,7 @@ router.post("/register", upload.single('image'),function(req,res){
         }
         passport.authenticate("local")(req,res,function(){
           console.log(req.body.image);
-          req.flash("success","Welcome to Sonder "+req.body.username +"!")
+          req.flash("success","Welcome to Starvest "+req.body.username +"!")
           res.redirect("/startup");
         });
       });
@@ -80,7 +80,7 @@ router.post("/login",passport.authenticate("local",{
   successRedirect : "/startup",
   failureRedirect : "/login",
   failureFlash: true,
-  successFlash: 'Welcome to Sonder!'
+  successFlash: 'Welcome to Starvest!'
 }),function(req,res){
 
 })
@@ -129,7 +129,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
       var mailOptions = {
         to: user.email,
         from: 'starvestindonesia@gmail.com',
-        subject: 'Node.js Password Reset',
+        subject: 'Password Reset',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
           'http://' + req.headers.host + '/reset/' + token + '\n\n' +
